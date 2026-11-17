@@ -1,0 +1,146 @@
+2026-11-17T10:32:44.054786Z	    9 Query	CREATE DATABASE sales_norm CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2026-11-17T10:32:44.085709Z	    9 Query	show databases
+2026-11-17T10:32:44.105135Z	    9 Query	CREATE TABLE sales_unnormalized_2 (
+2026-11-17T10:32:47.055858Z	    9 Query	INSERT INTO sales_unnormalized_2 VALUES
+2026-11-17T10:32:54.566180Z	    9 Query	SELECT * FROM sales_unnormalized_2
+2026-11-17T10:32:56.556395Z	    9 Query	SELECT SUM(price * quantity) AS total FROM sales_unnormalized_2
+2026-11-17T10:35:12.135198Z	    9 Query	UPDATE sales_unnormalized_2 
+2026-11-17T10:35:14.030416Z	    9 Query	SELECT * FROM sales_unnormalized_2 WHERE customer_id = 12
+2026-11-17T10:35:19.999441Z	    9 Query	DELETE FROM sales_unnormalized_2 WHERE customer_id = 23
+2026-11-17T10:35:20.864620Z	    9 Query	SELECT * FROM sales_unnormalized_2 WHERE customer_name = 'Испания'
+2026-11-17T10:35:31.561425Z	    9 Query	INSERT INTO sales_unnormalized_2 VALUES
+2026-11-17T10:36:49.595850Z	    9 Query	INSERT INTO sales_unnormalized_2 VALUES
+2026-11-17T10:36:55.032801Z	    9 Query	INSERT INTO sales_unnormalized_2 (customer_id, customer_name) 
+2026-11-17T10:36:55.671917Z	    9 Query	SELECT * FROM sales_unnormalized_2 WHERE customer_id = 99
+2026-11-17T10:37:00.958903Z	    9 Query	DELETE FROM sales_unnormalized_2 WHERE customer_id = 99
+2026-11-17T10:37:06.340804Z	    9 Query	UPDATE sales_unnormalized_2 
+2026-11-17T10:37:07.206149Z	    9 Query	SELECT * FROM sales_unnormalized_2
+2026-11-17T10:37:22.365685Z	   10 Query	use `sales_norm`
+2026-11-17T10:37:22.367025Z	   10 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'sales_unnormalized_2'
+2026-11-17T10:38:21.390853Z	   11 Query	show databases
+2026-11-17T10:38:28.905192Z	   11 Query	CREATE TABLE customers (
+2026-11-17T10:38:28.991818Z	   11 Query	CREATE TABLE products (
+2026-11-17T10:38:29.064645Z	   11 Query	CREATE TABLE reports (
+2026-11-17T10:38:29.849331Z	   11 Query	CREATE TABLE report_items (
+2026-11-17T10:38:39.008164Z	   11 Query	SHOW TABLES
+2026-11-17T10:38:39.010207Z	   11 Query	DESCRIBE customers
+2026-11-17T10:38:39.015324Z	   11 Query	DESCRIBE products
+2026-11-17T10:38:39.017473Z	   11 Query	DESCRIBE reports
+2026-11-17T10:38:49.651285Z	   11 Query	DESCRIBE report_items
+2026-11-17T10:39:26.944974Z	   11 Query	SELECT * FROM customers
+2026-11-17T10:39:26.946346Z	   11 Query	SELECT * FROM products
+2026-11-17T10:39:26.947258Z	   11 Query	SELECT * FROM reports
+2026-11-17T10:39:28.014831Z	   11 Query	SELECT * FROM report_items
+2026-11-17T10:40:41.346013Z	   11 Query	SELECT SUM(price * quantity) AS total_old FROM sales_unnormalized_2
+2026-11-17T10:40:41.347502Z	   11 Query	SELECT SUM(p.price * ri.quantity) AS total_new
+2026-11-17T10:40:41.348811Z	   11 Query	SELECT COUNT(*) AS customers_count FROM customers
+2026-11-17T10:40:41.349979Z	   11 Query	SELECT COUNT(*) AS products_count FROM products
+2026-11-17T10:40:41.351418Z	   11 Query	SELECT COUNT(*) AS reports_count FROM reports
+2026-11-17T10:40:42.548190Z	   11 Query	SELECT COUNT(*) AS items_count FROM report_items
+2026-11-17T10:40:56.186420Z	   11 Query	SELECT SUM(p.price * ri.quantity) AS total_spent
+2026-11-17T10:41:22.324681Z	   11 Query	INSERT INTO customers (customer_id, customer_name)
+2026-11-17T10:41:28.038442Z	   11 Query	INSERT INTO products (product_id, product_name, price)
+2026-11-17T10:41:33.647538Z	   11 Query	INSERT INTO reports (report_id, report_date, customer_id)
+2026-11-17T10:41:42.497685Z	   11 Query	INSERT INTO report_items (report_id, product_id, quantity)
+2026-11-17T10:42:39.469125Z	   11 Query	TRUNCATE TABLE report_items
+2026-11-17T10:42:46.736947Z	   11 Query	SELECT COUNT(*) FROM report_items
+2026-11-17T10:42:52.075201Z	   11 Query	SELECT COUNT(*) FROM customers
+2026-11-17T10:42:52.077806Z	   11 Query	SELECT COUNT(*) FROM products
+2026-11-17T10:43:02.840619Z	   11 Query	SELECT COUNT(*) FROM reports
+2026-11-17T10:43:06.794168Z	   11 Query	INSERT INTO report_items (report_id, product_id, quantity)
+2026-11-17T10:44:03.315555Z	   11 Query	INSERT INTO report_items (report_id, product_id, quantity)
+2026-11-17T10:44:09.170325Z	   11 Query	INSERT IGNORE INTO report_items (report_id, product_id, quantity)
+2026-11-17T10:44:15.947316Z	   11 Query	SELECT COUNT(*) FROM report_items
+2026-11-17T10:44:22.129544Z	   11 Query	SELECT * FROM report_items
+2026-11-17T10:44:22.130841Z	   11 Query	SELECT SUM(price * quantity) AS total_old FROM sales_unnormalized_2
+2026-11-17T10:45:24.131771Z	   11 Query	SELECT SUM(p.price * ri.quantity) AS total_new
+2026-11-17T10:46:31.676562Z	   11 Query	DELETE FROM sales_unnormalized_2 
+2026-11-17T10:46:37.673577Z	   11 Query	SELECT SUM(price * quantity) AS total_old FROM sales_unnormalized_2
+2026-11-17T10:46:43.692045Z	   11 Query	SELECT COUNT(*) AS customers FROM customers
+2026-11-17T10:46:43.695987Z	   11 Query	SELECT COUNT(*) AS products FROM products
+2026-11-17T10:46:43.700848Z	   11 Query	SELECT COUNT(*) AS reports FROM reports
+2026-11-17T10:46:44.817278Z	   11 Query	SELECT COUNT(*) AS items FROM report_items
+2026-11-17T10:46:55.261754Z	   11 Query	SELECT SUM(p.price * ri.quantity) AS total_spent
+2026-11-17T10:53:52.787142Z	   12 Query	use `sales_norm`
+2026-11-17T10:53:52.788603Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'customers'
+2026-11-17T10:53:52.791771Z	   12 Query	use `sales_norm`
+2026-11-17T10:53:52.792860Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'products'
+2026-11-17T10:53:52.795796Z	   12 Query	use `sales_norm`
+2026-11-17T10:53:52.796733Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'report_items'
+2026-11-17T10:53:52.799915Z	   12 Query	use `sales_norm`
+2026-11-17T10:53:52.801093Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'reports'
+2026-11-17T10:53:52.804149Z	   12 Query	use `sales_norm`
+2026-11-17T10:53:52.805348Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'sales_unnormalized_2'
+2026-11-17T11:23:29.671226Z	    9 Query	CREATE DATABASE sales_norm CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2026-11-17T11:23:29.693601Z	    9 Query	show databases
+2026-11-17T11:23:29.727306Z	    9 Query	CREATE TABLE sales_unnormalized (
+2026-11-17T11:23:30.750147Z	    9 Query	INSERT INTO sales_unnormalized VALUES
+2026-11-17T11:23:45.062419Z	    9 Query	SELECT * FROM sales_unnormalized
+2026-11-17T11:23:46.330946Z	    9 Query	SELECT SUM(unit_price * quantity) AS total FROM sales_unnormalized
+2026-11-17T11:26:07.204835Z	    9 Query	UPDATE sales_unnormalized 
+2026-11-17T11:26:08.368824Z	    9 Query	SELECT * FROM sales_unnormalized WHERE client_id = 101
+2026-11-17T11:24:14.401597Z	    9 Query	DELETE FROM sales_unnormalized WHERE client_id = 102
+2026-11-17T11:24:15.444414Z	    9 Query	SELECT * FROM sales_unnormalized WHERE client_name = 'Петрова Мария'
+2026-11-17T11:24:24.152902Z	    9 Query	INSERT INTO sales_unnormalized VALUES
+2026-11-17T11:24:32.623479Z	    9 Query	INSERT INTO sales_unnormalized (client_id, client_name, client_city) 
+2026-11-17T11:24:33.291376Z	    9 Query	SELECT * FROM sales_unnormalized WHERE client_id = 999
+2026-11-17T11:24:41.118119Z	    9 Query	DELETE FROM sales_unnormalized WHERE client_id = 999
+2026-11-17T11:24:47.467279Z	    9 Query	UPDATE sales_unnormalized 
+2026-11-17T11:24:48.018413Z	    9 Query	SELECT SUM(unit_price * quantity) AS total FROM sales_unnormalized
+2026-11-17T11:24:58.898673Z	   10 Query	use `sales_norm`
+2026-11-17T11:24:58.900222Z	   10 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'customers'
+2026-11-17T11:24:58.904023Z	   10 Query	use `sales_norm`
+2026-11-17T11:24:58.905224Z	   10 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'products'
+2026-11-17T11:24:58.908400Z	   10 Query	use `sales_norm`
+2026-11-17T11:24:58.909475Z	   10 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'report_items'
+2026-11-17T11:24:58.912609Z	   10 Query	use `sales_norm`
+2026-11-17T11:24:58.913749Z	   10 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'reports'
+2026-11-17T11:24:58.917226Z	   10 Query	use `sales_norm`
+2026-11-17T11:24:58.918325Z	   10 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'sales_unnormalized'
+2026-11-17T11:24:58.921384Z	   10 Query	use `sales_norm`
+2026-11-17T11:24:58.922419Z	   10 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'sales_unnormalized_2'
+2026-11-17T11:26:21.240045Z	   11 Query	show databases
+2026-11-17T11:26:21.245150Z	   11 Query	CREATE TABLE clients (
+2026-11-17T11:26:21.322577Z	   11 Query	CREATE TABLE products (
+2026-11-17T11:26:21.325161Z	   11 Query	CREATE TABLE sales (
+2026-11-17T11:26:22.118587Z	   11 Query	CREATE TABLE sale_items (
+2026-11-17T11:26:30.586239Z	   11 Query	INSERT INTO clients (client_id, client_name, client_city)
+2026-11-17T11:26:30.600397Z	   11 Query	INSERT INTO products (product_id, product_name, unit_price)
+2026-11-17T11:26:30.602577Z	   11 Query	INSERT INTO sales (sale_id, sale_date, client_id)
+2026-11-17T11:26:31.209081Z	   11 Query	INSERT INTO sale_items (sale_id, product_id, quantity)
+2026-11-17T11:28:08.502156Z	   11 Query	DESCRIBE products
+2026-11-17T11:28:16.195301Z	   11 Query	INSERT INTO products (product_id, product_name, price)
+2026-11-17T11:28:23.057351Z	   11 Query	SELECT * FROM products
+2026-11-17T11:29:35.978210Z	   11 Query	SELECT * FROM products
+2026-11-17T11:29:36.938583Z	   11 Query	SELECT COUNT(*) FROM products
+2026-11-17T11:29:44.550308Z	   11 Query	DELETE FROM products WHERE product_id < 200
+2026-11-17T11:30:35.002230Z	   11 Query	SHOW TABLES
+2026-11-17T11:30:40.640318Z	   11 Query	DROP TABLE IF EXISTS report_items
+2026-11-17T11:30:40.687725Z	   11 Query	DROP TABLE IF EXISTS reports
+2026-11-17T11:30:41.394741Z	   11 Query	DROP TABLE IF EXISTS customers
+2026-11-17T11:30:44.918797Z	   11 Query	DELETE FROM products WHERE product_id < 200
+2026-11-17T11:30:51.634510Z	   11 Query	SELECT COUNT(*) FROM products
+2026-11-17T11:30:56.496121Z	   11 Query	SELECT * FROM products
+2026-11-17T11:30:56.496654Z	   11 Query	SELECT * FROM clients
+2026-11-17T11:31:17.628275Z	   11 Query	SELECT * FROM sales
+2026-11-17T11:31:17.628821Z	   11 Query	DELETE FROM clients WHERE client_id < 100
+2026-11-17T11:31:18.539255Z	   11 Query	DELETE FROM sales WHERE sale_id < 5000
+2026-11-17T11:31:32.013158Z	   11 Query	SELECT COUNT(*) FROM clients
+2026-11-17T11:31:32.040467Z	   11 Query	SELECT COUNT(*) FROM sales
+2026-11-17T11:31:39.796971Z	   11 Query	INSERT INTO sale_items (sale_id, product_id, quantity)
+2026-11-17T11:31:44.156212Z	   11 Query	SELECT COUNT(*) FROM sale_items
+2026-11-17T11:31:51.804105Z	   11 Query	SELECT SUM(unit_price * quantity) AS total_old FROM sales_unnormalized
+2026-11-17T11:31:52.458011Z	   11 Query	SELECT SUM(p.price * si.quantity) AS total_new
+2026-11-17T11:31:58.519075Z	   11 Query	SELECT SUM(p.price * si.quantity) AS total_spent
+2026-11-17T11:33:31.350068Z	   12 Query	use `sales_norm`
+2026-11-17T11:33:31.351342Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'clients'
+2026-11-17T11:33:31.354895Z	   12 Query	use `sales_norm`
+2026-11-17T11:33:31.356194Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'products'
+2026-11-17T11:33:31.359310Z	   12 Query	use `sales_norm`
+2026-11-17T11:33:31.360396Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'sale_items'
+2026-11-17T11:33:31.363170Z	   12 Query	use `sales_norm`
+2026-11-17T11:33:31.364186Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'sales'
+2026-11-17T11:33:31.367901Z	   12 Query	use `sales_norm`
+2026-11-17T11:33:31.368933Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'sales_unnormalized'
+2026-11-17T11:33:31.373028Z	   12 Query	use `sales_norm`
+2026-11-17T11:33:31.374145Z	   12 Query	SELECT COLUMN_NAME,                       JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"')                FROM information_schema.COLUMN_STATISTICS                WHERE SCHEMA_NAME = 'sales_norm' AND TABLE_NAME = 'sales_unnormalized_2'
